@@ -6,7 +6,7 @@ tags:
   - provider/grafana
 ---
 
-# Component: `managed`
+# Component: `managed-grafana-workspace`
 
 This component is responsible for provisioning an Amazon Managed Grafana workspace.
 
