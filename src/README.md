@@ -8,11 +8,10 @@ tags:
 
 # Component: `managed-grafana-workspace`
 
-This component is responsible for provisioning an Amazon Managed Grafana workspace.
+This component provisions an Amazon Managed Grafana workspace.
 
 Amazon Managed Grafana is a fully managed service for Grafana, a popular open-source analytics platform that enables you
 to query, visualize, and alert on your metrics, logs, and traces.
-
 ## Usage
 
 **Stack Level**: Regional
@@ -45,15 +44,12 @@ components:
 ```
 
 > [!NOTE]
->
-> We would prefer to have a custom URL for the provisioned Grafana workspace, but at the moment it's not supported
-> natively and implementation would be non-trivial. We will continue to monitor that Issue and consider alternatives,
-> such as using Cloudfront.
+> We would prefer to have a custom URL for the provisioned Grafana workspace, but at the moment it's not supported natively and implementation would be non-trivial. We will continue to monitor that Issue and consider alternatives, such as using CloudFront.
 >
 > [Issue #6: Support for Custom Domains](https://github.com/aws/amazon-managed-grafana-roadmap/issues/6)
 
-<!-- prettier-ignore-start -->
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+
+<!-- markdownlint-disable -->
 ## Requirements
 
 | Name | Version |
@@ -118,12 +114,17 @@ components:
 |------|-------------|
 | <a name="output_workspace_endpoint"></a> [workspace\_endpoint](#output\_workspace\_endpoint) | The returned URL of the Amazon Managed Grafana workspace |
 | <a name="output_workspace_id"></a> [workspace\_id](#output\_workspace\_id) | The ID of the Amazon Managed Grafana workspace |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-<!-- prettier-ignore-end -->
+<!-- markdownlint-restore -->
+
+
 
 ## References
 
-- [cloudposse/terraform-aws-components](https://github.com/cloudposse/terraform-aws-components/tree/main/modules/managed-grafana/workspace) -
-  Cloud Posse's upstream component
+
+- [cloudposse-terraform-components](https://github.com/orgs/cloudposse-terraform-components/repositories) - Cloud Posse's upstream component
+
+
+
 
 [<img src="https://cloudposse.com/logo-300x69.svg" height="32" align="right"/>](https://cpco.io/homepage?utm_source=github&utm_medium=readme&utm_campaign=cloudposse-terraform-components/aws-managed-grafana-workspace&utm_content=)
+
