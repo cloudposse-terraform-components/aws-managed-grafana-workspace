@@ -30,6 +30,12 @@ variable "prometheus_source_accounts" {
 }
 
 
+variable "additional_allowed_role_arns" {
+  type        = list(string)
+  description = "A list of IAM role ARNs that the Grafana workspace role should be allowed to assume. Use this for cross-account access to services like CloudWatch"
+  default     = []
+}
+
 variable "private_network_access_enabled" {
   type        = bool
   description = "If set to `true`, enable the VPC Configuration to allow this workspace to access the private network using outputs from the vpc component"

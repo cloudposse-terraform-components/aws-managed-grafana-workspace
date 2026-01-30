@@ -1,7 +1,10 @@
 locals {
   enabled = module.this.enabled
 
-  additional_allowed_roles = compact([for prometheus in module.prometheus : prometheus.outputs.access_role_arn])
+  additional_allowed_roles = compact(concat(
+    [for prometheus in module.prometheus : prometheus.outputs.access_role_arn],
+    var.additional_allowed_role_arns
+  ))
 }
 
 module "security_group" {
