@@ -22,12 +22,15 @@ module "security_group" {
 
 module "managed_grafana" {
   source  = "cloudposse/managed-grafana/aws"
-  version = "0.5.0"
+  version = "0.6.0"
 
   enabled = local.enabled
 
   prometheus_policy_enabled = var.prometheus_policy_enabled
   additional_allowed_roles  = local.additional_allowed_roles
+
+  configuration   = var.workspace_configuration
+  grafana_version = var.grafana_version
 
   vpc_configuration = var.private_network_access_enabled ? {
     subnet_ids         = module.vpc.outputs.private_subnet_ids

@@ -41,3 +41,33 @@ variable "private_network_access_enabled" {
   description = "If set to `true`, enable the VPC Configuration to allow this workspace to access the private network using outputs from the vpc component"
   default     = false
 }
+
+variable "workspace_configuration" {
+  type        = string
+  description = <<-EOT
+    JSON string passed through to `aws_grafana_workspace.configuration`.
+    Most commonly used to flip the workspace from legacy alerting to
+    Grafana unified alerting permanently:
+
+      workspace_configuration = jsonencode({
+        unifiedAlerting = { enabled = true }
+        plugins         = { pluginAdminEnabled = false }
+      })
+
+    Without this, AMG runs in legacy alerting mode and any unified-alerting
+    resources provisioned via the Grafana API exist but are never evaluated
+    by the running engine. See:
+    https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html
+  EOT
+  default     = null
+}
+
+variable "grafana_version" {
+  type        = string
+  description = <<-EOT
+    Pin the Grafana major version supported by the workspace. Supported AMG
+    values include `9.4`, `10.4`, `12.4`. Leave null to follow AMG's
+    latest-supported default.
+  EOT
+  default     = null
+}
