@@ -29,7 +29,7 @@ module "managed_grafana" {
   prometheus_policy_enabled = var.prometheus_policy_enabled
   additional_allowed_roles  = local.additional_allowed_roles
 
-  configuration   = var.workspace_configuration
+  configuration   = var.workspace_configuration != null ? jsonencode(var.workspace_configuration) : null
   grafana_version = var.grafana_version
 
   vpc_configuration = var.private_network_access_enabled ? {

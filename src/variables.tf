@@ -43,20 +43,23 @@ variable "private_network_access_enabled" {
 }
 
 variable "workspace_configuration" {
-  type        = string
+  type        = any
   description = <<-EOT
-    JSON string passed through to `aws_grafana_workspace.configuration`.
-    Most commonly used to flip the workspace from legacy alerting to
-    Grafana unified alerting permanently:
+    Workspace-level settings passed through to `aws_grafana_workspace.configuration`.
+    Authored as a native object/map; the component jsonencodes it before applying,
+    so callers can express the config in YAML rather than embedding pre-encoded JSON
+    strings:
 
-      workspace_configuration = jsonencode({
-        unifiedAlerting = { enabled = true }
-        plugins         = { pluginAdminEnabled = false }
-      })
+      workspace_configuration:
+        unifiedAlerting:
+          enabled: true
+        plugins:
+          pluginAdminEnabled: false
 
-    Without this, AMG runs in legacy alerting mode and any unified-alerting
-    resources provisioned via the Grafana API exist but are never evaluated
-    by the running engine. See:
+    Most commonly used to flip the workspace from legacy alerting to Grafana unified
+    alerting permanently. Without this, AMG runs in legacy alerting mode and any
+    unified-alerting resources provisioned via the Grafana API exist but are never
+    evaluated by the running engine. See:
     https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html
   EOT
   default     = null
