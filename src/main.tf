@@ -26,13 +26,20 @@ module "managed_grafana" {
 
   enabled = local.enabled
 
+  authentication_providers  = var.authentication_providers
+  permission_type           = var.permission_type
+  account_access_type       = var.account_access_type
+  organizational_units      = var.organizational_units
+  data_sources              = var.data_sources
+  grafana_version           = var.grafana_version
+  configuration             = var.configuration
   prometheus_policy_enabled = var.prometheus_policy_enabled
   additional_allowed_roles  = local.additional_allowed_roles
 
   vpc_configuration = var.private_network_access_enabled ? {
     subnet_ids         = module.vpc.outputs.private_subnet_ids
     security_group_ids = [module.security_group.id]
-  } : {}
+  } : null
 
   context = module.this.context
 }
@@ -44,6 +51,7 @@ resource "aws_grafana_role_association" "sso" {
 
   role      = each.value.role
   group_ids = each.value.group_ids
+  user_ids  = each.value.user_ids
 
   workspace_id = module.managed_grafana.workspace_id
 }
