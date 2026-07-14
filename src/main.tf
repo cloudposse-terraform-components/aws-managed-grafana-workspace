@@ -22,7 +22,7 @@ module "security_group" {
 
 module "managed_grafana" {
   source  = "cloudposse/managed-grafana/aws"
-  version = "0.5.0"
+  version = "0.6.0"
 
   enabled = local.enabled
 
